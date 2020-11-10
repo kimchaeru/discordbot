@@ -3,9 +3,39 @@ const client = new Discord.Client();
 const token = process.env.token;
 
 client.on('ready', () => {
-    console.log('켰다.');
-    client.user.setPresence({ game: { name: '채루님!.' }, status: 'online' })
-  });
+	(async function () {
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms))
+        };
+        console.log(client.user.tag)
+		console.log(client.user.id)
+		console.log('\n봇이 준비 되었습니다.');
+    answered1 = true;
+    answered2 = true;
+    answered3 = true;
+    userAnswer1 = "채루님..";
+    userAnswer2 = "코로나확진자";
+    userAnswer3 = "서버관리";
+        var i = 0;
+        while (i < 10) {
+            client.user.setPresence({
+                activity: {
+                    name: '채루님'
+                },
+                status: 'online'
+            })
+            await sleep(5000)
+            client.user.setPresence({
+                activity: {
+                    name: `봇`
+                },
+                status: 'online'
+            })
+            await sleep(5000)
+        }
+    })();
+});
+
 
 let MuteRole = '768430566676496416'
 let Cooltime_Mute = 3 * 1000 //밀리세컨드 
