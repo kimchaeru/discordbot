@@ -51,6 +51,23 @@ client.on('message', async message => {
   }
 })
 
+// 욕설 체크
+let msg = message.content;
+for(fw of forbiddenWord) {
+    if(msg.indexOf(bot.prefix+fw) != -1) { // ㅗ 같이. 명령어와 섞일 수 있기 때문에 추가한 부분
+        continue;
+    } else if(msg.indexOf(fw) != -1) {
+        message.guild.members.cache.find(x => x.id == message.author.id).roles.add(muterole.id)
+        if(messageTime == forbiddenWordTime) {
+            message.reply(`첫 채팅이 욕이냐. 이 개새끼야. Mute 먹어라.\n\`\`사용한 욕: ${fw}\`\`   \`\`전 채팅과의 간격 ${messageTime - forbiddenWordTime}ms\`\`\n\n${apology_channel}`);
+        } else {
+            message.reply(`욕 하지마라 이 개새끼야. 씨발. 님 Mute 드셈.\n\`\`사용한 욕: ${fw}\`\`   \`\`전 채팅과의 간격 ${messageTime - forbiddenWordTime}ms\`\`\n\n${apology_channel}`);
+        }
+        bot.authors.set(message.author.id, messageTime);
+        return true;
+    }
+}
+
 client.on('message', message => {
     
   let foods = ["라면", "피자", "치킨", "굶어" ,"나도몰라 개x야","채루" ,"설빙소주"]
