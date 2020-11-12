@@ -7,7 +7,6 @@
     "r": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^12.4.1",
-    "weather-js": "^2.0.0"
+    "discord.js": "^12.4.1"
   }
 }
